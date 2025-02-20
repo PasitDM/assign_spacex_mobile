@@ -1,4 +1,4 @@
-package com.pst.spacex.assign_spacex_mobile
+package com.pst.spacex
 
 import io.flutter.embedding.android.FlutterActivity
 
