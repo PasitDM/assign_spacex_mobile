@@ -10,6 +10,10 @@ android {
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
+    buildFeatures {
+        buildConfig = true
+    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
@@ -44,11 +48,13 @@ android {
         create("prod") {
             dimension = "default"
             resValue(type = "string", name = "app_name", value = "Pst SpaceX")
+            buildConfigField("String", "FLAVOR", "\"prod\"")
         }
         create("mock") {
             dimension = "default"
             resValue(type = "string", name = "app_name", value = "Pst SpaceX (MOCK)")
             applicationIdSuffix = ".mock"
+            buildConfigField("String", "FLAVOR", "\"mock\"")
         }
     }
 }

@@ -1,6 +1,13 @@
 import 'package:flutter/material.dart';
 
-void main() {
+import 'core/configuration/app_flavor.dart';
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final flavor = FlavorConfig();
+  await flavor.getFlavorSettings();
+  await flavor.loadEnv();
+
   runApp(const MyApp());
 }
 
@@ -105,10 +112,7 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             const Text('You have pushed the button this many times:'),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
+            Text('$_counter', style: Theme.of(context).textTheme.headlineMedium),
           ],
         ),
       ),
