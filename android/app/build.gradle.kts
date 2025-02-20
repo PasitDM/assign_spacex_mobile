@@ -37,6 +37,20 @@ android {
             signingConfig = signingConfigs.getByName("debug")
         }
     }
+
+    flavorDimensions += "default"
+
+    productFlavors {
+        create("prod") {
+            dimension = "default"
+            resValue(type = "string", name = "app_name", value = "Pst SpaceX")
+        }
+        create("mock") {
+            dimension = "default"
+            resValue(type = "string", name = "app_name", value = "Pst SpaceX (MOCK)")
+            applicationIdSuffix = ".mock"
+        }
+    }
 }
 
 flutter {
