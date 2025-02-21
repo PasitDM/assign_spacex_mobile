@@ -108,6 +108,8 @@ test/
 ## 📸 UI Showcase  
 
 ### **📌 Mobile View**  
+![Mobile Main](assets/images/m_flow.gif)
+
 | Main Screen | Detail Page | Search | Sort |
 |------------|------------|--------|------|
 | ![Mobile Main](assets/images/m1.png) | ![Mobile Detail](assets/images/mdetail.png) | ![Mobile Search](assets/images/msearch.png) | ![Mobile Sort](assets/images/msort.png) |
