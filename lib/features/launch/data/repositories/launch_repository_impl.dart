@@ -18,7 +18,8 @@ class LaunchRepositoryImpl implements LaunchRepository {
             details: model.details ?? '',
             patchSmall: model.patchSmall ?? '',
             patchLarge: model.patchLarge ?? '',
-            webcast: model.webcast ?? '',
+            upcoming: model.upcoming,
+            success: model.success,
           ),
         )
         .toList();

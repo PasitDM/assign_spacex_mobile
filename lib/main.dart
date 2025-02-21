@@ -28,9 +28,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: [BlocProvider(create: (_) => appModule<LaunchBloc>()..add(LoadLaunches()))],
+      providers: [BlocProvider(create: (_) => appModule<LaunchBloc>()..add(InitialLaunches()))],
       child: MaterialApp(
-        title: 'Flutter Demo',
+        debugShowCheckedModeBanner: false,
+        title: 'SpaceX',
         theme: ThemeData(colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple)),
         home: const LaunchPage(),
       ),

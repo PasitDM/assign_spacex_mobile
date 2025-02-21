@@ -4,7 +4,8 @@ class Launch {
   final String details;
   final String patchSmall;
   final String patchLarge;
-  final String webcast;
+  final bool upcoming;
+  final bool success;
 
   Launch({
     required this.name,
@@ -12,6 +13,7 @@ class Launch {
     required this.details,
     required this.patchSmall,
     required this.patchLarge,
-    required this.webcast,
+    required this.upcoming,
+    required this.success,
   });
 }

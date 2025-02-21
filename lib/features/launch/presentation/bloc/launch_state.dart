@@ -13,11 +13,13 @@ class LaunchLoading extends LaunchState {}
 
 class LaunchLoaded extends LaunchState {
   final List<Launch> launches;
+  final List<Launch> originalLaunches;
+  final SortType sortType;
 
-  const LaunchLoaded(this.launches);
+  const LaunchLoaded({required this.launches, required this.originalLaunches, required this.sortType});
 
   @override
-  List<Object> get props => [launches];
+  List<Object> get props => [launches, originalLaunches, sortType];
 }
 
 class LaunchError extends LaunchState {
