@@ -170,6 +170,7 @@ BLoC Tests
 
 ### **📌 Mobile View**  
 ![Mobile Main](assets/images/m_flow.gif)
+![Mobile Main](assets/images/ipad_flow.gif)
 
 | Main Screen | Detail Page | Search | Sort |
 |------------|------------|--------|------|
