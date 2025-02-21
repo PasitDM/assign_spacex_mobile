@@ -141,6 +141,7 @@ class LaunchList extends StatelessWidget {
         if (state is LaunchLoading) {
           return const Center(child: CircularProgressIndicator());
         } else if (state is LaunchLoaded) {
+          print('state.launches.length: ${state.launches.length}');
           return ListView.builder(
             controller: scrollController,
             itemCount: state.launches.length + 1,

@@ -2,12 +2,12 @@ import '../../data/models/launch_query_request.dart';
 import '../entities/launch.dart';
 import '../repositories/launch_repository.dart';
 
-class GetPastLaunches {
+class GetQueryLaunches {
   final LaunchRepository repository;
 
-  GetPastLaunches(this.repository);
+  GetQueryLaunches(this.repository);
 
   Future<List<Launch>> call(LaunchQueryRequest request) async {
-    return await repository.getPastLaunches(request);
+    return await repository.getQueryLaunches(request);
   }
 }

@@ -9,7 +9,7 @@ class LaunchRemoteDataSource {
 
   LaunchRemoteDataSource(this.dio);
 
-  Future<List<LaunchModel>> queryLaunches(LaunchQueryRequest request) async {
+  Future<List<LaunchModel>> getQueryLaunches(LaunchQueryRequest request) async {
     final response = await dio.post(
       '/launches/query',
       data: {
