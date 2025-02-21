@@ -5,6 +5,27 @@ Users can **view launch details, sort, search, and navigate to a detailed page**
 The project follows **Clean Architecture** and uses **BLoC for state management**.
 
 ---
+## 🚀 Features Implemented
+
+✅ **BLoC State Management**  
+✅ **Displays launch list with relevant fields**  
+✅ **Launch detail page with extended information**  
+✅ **Sorting options (4 types, handled via API query)**  
+✅ **Search functionality**  
+✅ **Multi-flavor support (mock & prod) - Mock uses local JSON**  
+
+### 🔹 **Unfinished Due to Time Constraints:**
+❌ **Unit Tests** (Datasource Tests)  
+❌ **UI Tests**  
+❌ **BLoC Tests**  
+❌ **Golden Tests**  
+❌ **Smooth Page Transitions**  
+
+---
+
+## 📜 **Project Setup Instructions**
+
+
 
 ## 📜 Project Setup Instructions
 ### 🔹 **1. Clone the repository**
