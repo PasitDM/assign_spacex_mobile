@@ -102,7 +102,50 @@ test/
 │
 └── widget_test.dart  # General UI tests
 ```
+```
+📂 features/launch/ - Main module for SpaceX launches
+🔹 data/ (Handles API calls & data conversion)
+datasources/
+  launch_remote_data_source.dart - Fetches launch data from API
+  mock_launch_remote_data_source.dart - Mock API data source for testing
+models/
+  launch_model.dart - Defines API response for launch data
+  launch_query_request.dart - Defines API request structure
+repositories/
+  launch_repository_impl.dart - Converts API models to entities & provides data to the domain layer
 
+🔹 domain/ (Business logic layer)
+entities/
+  launch.dart - Core entity representing a launch
+  launchpad.dart - Core entity representing a launchpad
+  
+repositories/
+  launch_repository.dart - Interface defining launch data methods
+usecases/
+  get_launchpad_id.dart - Fetches launchpad details
+  get_query_launches.dart - Fetches launches with pagination & sorting
+
+🔹 presentation/ (UI layer)
+BLoC (State Management)
+  launch_bloc.dart - Handles launch list state
+  launch_event.dart - Defines actions users can take
+  launch_state.dart - Defines UI states (loading, success, error)
+Pages (UI Screens)
+  launch_page.dart - Displays a list of launches
+Widgets (UI Components)
+  launch_list_item.dart - UI component for each launch
+  search_bar_widget.dart - Search bar for filtering launches
+  sort_options_widget.dart - Dropdown for sorting launches
+📂 test/ - Unit and widget tests
+Unit Tests
+  launch_remote_data_source_test.dart - Tests API data source
+  mock_launch_data.json - Mock test data
+Use Case Tests
+  get_launchpad_id_test.dart - Tests fetching launchpad details
+  get_rocket_id_test.dart - Tests fetching rocket details
+BLoC Tests
+  launch_bloc_test.dart - Tests for launch BLoC
+```
 
 
 ## 📸 UI Showcase  
