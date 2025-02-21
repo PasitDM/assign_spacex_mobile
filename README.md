@@ -156,8 +156,7 @@ BLoC Tests
 | Main Screen | Detail Page | Search | Sort |
 |------------|------------|--------|------|
 | ![Mobile Main](assets/images/m1.png) | ![Mobile Detail](assets/images/mdetail.png) | ![Mobile Search](assets/images/msearch.png) | ![Mobile Sort](assets/images/msort.png) |
-| ![Mobile Detail 1](assets/images/mdetail1.png) |  | ![Mobile Search 1](assets/images/msearch1.png) | ![Mobile Sort 1](assets/images/msort1.png) |
-|  |  |  | ![Mobile Sort 2](assets/images/msort2.png) |
+|| ![Mobile Detail 1](assets/images/mdetail1.png) |  | ![Mobile Search 1](assets/images/msearch1.png) | ![Mobile Sort 1](assets/images/msort2.png) |
 
 ---
 
@@ -165,6 +164,6 @@ BLoC Tests
 | Main Screen | Detail Page | More Info | Search | Sort |
 |------------|------------|------------|--------|------|
 | ![iPad Main](assets/images/ipad.png) | ![iPad Detail](assets/images/ipaddetail.png) | ![iPad More](assets/images/ipadmore.png) | ![iPad Search](assets/images/ipadsearch.png) | ![iPad Sort](assets/images/ipadsort1.png) |
-| ![iPad Detail 1](assets/images/ipaddetail1.png) |  |  | ![iPad Search 1](assets/images/ipadsearch1.png) | ![iPad Sort 2](assets/images/ipadsort2.png) |
+|| ![iPad Detail 1](assets/images/ipaddetail1.png) |  |  | ![iPad Search 1](assets/images/ipadsearch1.png) | ![iPad Sort 2](assets/images/ipadsort2.png) |
 
 ---
