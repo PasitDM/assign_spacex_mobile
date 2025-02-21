@@ -1,18 +1,24 @@
 # PST SpaceX - Flutter App
+ **Flutter SDK:** 3.29.0  
 
 This Flutter application displays SpaceX launches using the SpaceX API.
 Users can **view launch details, sort, search, and navigate to a detailed page** for each mission.
 The project follows **Clean Architecture** and uses **BLoC for state management**.
 
 ---
-## 🚀 Features Implemented
+## 🚀 Features Implemented  
 
-✅ **BLoC State Management**  
-✅ **Displays launch list with relevant fields**  
-✅ **Launch detail page with extended information**  
-✅ **Sorting options (4 types, handled via API query)**  
-✅ **Search functionality**  
-✅ **Multi-flavor support (mock & prod) - Mock uses local JSON**  
+✅ **BLoC State Management** (flutter_bloc)  
+✅ **Displays launch list with relevant fields** (Mission Name, Date, Status, etc.)  
+✅ **Launch detail page with extended information** (Rocket, Crew, Launchpad)  
+✅ **Sorting options** (Sort by Name, Date - Newest to Oldest, Oldest to Newest)  
+✅ **Search functionality** (Filter launches dynamically)  
+✅ **Multi-flavor support** (mock & prod) - Mock uses local JSON  
+✅ **Responsive** UI: Mobile & Tablet 
+✅ **Uses SpaceX API endpoints**:  
+   - **POST** `/v5/launches/query` (Pagination, Sorting)  
+   - **GET** `/v4/rockets/{id}` (Rocket Info)  
+   - **GET** `/v4/launchpads/{id}` (Launchpad Info)  
 
 ### 🔹 **Unfinished Due to Time Constraints:**
 ❌ **Unit Tests** (Datasource Tests)  
@@ -22,6 +28,15 @@ The project follows **Clean Architecture** and uses **BLoC for state management*
 ❌ **Smooth Page Transitions**  
 
 ---
+
+## 📦 Dependencies Used  
+
+- `flutter_bloc` - State Management  
+- `dio` - API Networking  
+- `json_serializable` - JSON Parsing  
+- `get_it` - Dependency Injection  
+- `intl` - Date Formatting  
+- `flutter_test` - Testing Framework  
 
 
 ## 📜 Project Setup Instructions
