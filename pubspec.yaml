@@ -45,6 +45,10 @@ dependencies:
   # utility
   flutter_dotenv: ^5.2.1
 
+  # image loader
+  flutter_svg: ^2.0.17
+  extended_image: ^9.1.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

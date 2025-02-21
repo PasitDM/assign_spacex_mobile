@@ -27,4 +27,37 @@ class SearchLaunches extends LaunchEvent {
   List<Object> get props => [query];
 }
 
+class LoadMoreLaunches extends LaunchEvent {
+  final int page;
+
+  const LoadMoreLaunches(this.page);
+
+  @override
+  List<Object> get props => [page];
+}
+
 enum SortType { missionNameAsc, missionNameDesc, launchDateAsc, launchDateDesc }
+
+extension SortTypeExtension on SortType {
+  String get field {
+    switch (this) {
+      case SortType.missionNameAsc:
+      case SortType.missionNameDesc:
+        return 'name';
+      case SortType.launchDateAsc:
+      case SortType.launchDateDesc:
+        return 'date_utc';
+    }
+  }
+
+  String get order {
+    switch (this) {
+      case SortType.missionNameAsc:
+      case SortType.launchDateAsc:
+        return 'asc';
+      case SortType.missionNameDesc:
+      case SortType.launchDateDesc:
+        return 'desc';
+    }
+  }
+}

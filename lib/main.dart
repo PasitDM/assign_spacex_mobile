@@ -5,7 +5,7 @@ import 'package:get_it/get_it.dart';
 import 'core/configuration/app_flavor.dart';
 import 'di/app_module.dart';
 import 'features/launch/presentation/bloc/launch_bloc.dart';
-import 'features/launch/presentation/pages/launch_screen.dart';
+import 'features/launch/presentation/pages/launch_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

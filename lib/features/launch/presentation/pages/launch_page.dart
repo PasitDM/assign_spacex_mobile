@@ -1,10 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../common/components/images/app_image.dart';
 import '../../domain/entities/launch.dart';
 import '../bloc/launch_bloc.dart';
 
-class LaunchPage extends StatelessWidget {
+class LaunchPage extends StatefulWidget {
   const LaunchPage({super.key});
+
+  @override
+  State<LaunchPage> createState() => _LaunchPageState();
+}
+
+class _LaunchPageState extends State<LaunchPage> {
+  final ScrollController _scrollController = ScrollController();
+  int _currentPage = 1;
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController.addListener(_onScroll);
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  void _onScroll() {
+    if (_scrollController.position.pixels == _scrollController.position.maxScrollExtent) {
+      context.read<LaunchBloc>().add(LoadMoreLaunches(_currentPage + 1));
+      setState(() {
+        _currentPage++;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,31 +62,43 @@ class LaunchPage extends StatelessWidget {
             ),
           ),
           Expanded(
-            child: BlocBuilder<LaunchBloc, LaunchState>(
-              builder: (context, state) {
-                if (state is LaunchLoading) {
-                  return const Center(child: CircularProgressIndicator());
-                } else if (state is LaunchLoaded) {
-                  return ListView.builder(
-                    itemCount: state.launches.length,
-                    itemBuilder: (context, index) {
-                      final launch = state.launches[index];
-                      return ListTile(
-                        title: Text(launch.name),
-                        subtitle: Text(launch.dateUtc),
-                        trailing: launch.patchSmall.isNotEmpty ? Image.network(launch.patchSmall) : null,
-                        onTap: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => LaunchDetailPage(launch: launch)));
-                        },
-                      );
-                    },
-                  );
-                } else if (state is LaunchError) {
-                  return Center(child: Text(state.message));
-                } else {
-                  return const Center(child: Text('No data'));
-                }
+            child: RefreshIndicator(
+              onRefresh: () async {
+                context.read<LaunchBloc>().add(InitialLaunches());
+                setState(() {
+                  _currentPage = 1;
+                });
               },
+              child: BlocBuilder<LaunchBloc, LaunchState>(
+                builder: (context, state) {
+                  if (state is LaunchLoading) {
+                    return const Center(child: CircularProgressIndicator());
+                  } else if (state is LaunchLoaded) {
+                    return ListView.builder(
+                      controller: _scrollController,
+                      itemCount: state.launches.length + 1,
+                      itemBuilder: (context, index) {
+                        if (index == state.launches.length) {
+                          return const Center(child: CircularProgressIndicator());
+                        }
+                        final launch = state.launches[index];
+                        return ListTile(
+                          title: Text(launch.name),
+                          subtitle: Text(launch.dateUtc),
+                          trailing: launch.patchSmall.isNotEmpty ? AppImage(imageUrl: launch.patchSmall) : null,
+                          onTap: () {
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => LaunchDetailPage(launch: launch)));
+                          },
+                        );
+                      },
+                    );
+                  } else if (state is LaunchError) {
+                    return Center(child: Text(state.message));
+                  } else {
+                    return const Center(child: Text('No data'));
+                  }
+                },
+              ),
             ),
           ),
         ],

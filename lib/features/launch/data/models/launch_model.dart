@@ -8,7 +8,7 @@ class LaunchModel {
   final String? patchLarge;
   final String? webcast;
   final String? rocket;
-  final List<String>? crew;
+  final List<Crew>? crew;
   final String? launchpad;
 
   LaunchModel({
@@ -36,13 +36,50 @@ class LaunchModel {
       patchLarge: json['links']['patch']['large'],
       webcast: json['links']['webcast'],
       rocket: json['rocket'],
-      crew: (json['crew'] as List<dynamic>?)?.map((e) => e as String).toList(),
+      crew: json['crew'] != null ? (json['crew'] as List).map((i) => Crew.fromJson(i)).toList() : null,
       launchpad: json['launchpad'],
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    final data = <String, dynamic>{};
+    data['name'] = name;
+    data['date_utc'] = dateUtc;
+    data['upcoming'] = upcoming;
+    data['success'] = success;
+    data['details'] = details;
+    data['links'] = {
+      'patch': {'small': patchSmall, 'large': patchLarge},
+      'webcast': webcast,
+    };
+    data['rocket'] = rocket;
+    if (crew != null) {
+      data['crew'] = crew!.map((v) => v.toJson()).toList();
+    }
+    data['launchpad'] = launchpad;
+    return data;
   }
 
   @override
   String toString() {
     return 'LaunchModel(name: $name, dateUtc: $dateUtc, upcoming: $upcoming, success: $success, details: $details, patchSmall: $patchSmall, patchLarge: $patchLarge, webcast: $webcast, rocket: $rocket, crew: $crew, launchpad: $launchpad)';
+  }
+}
+
+class Crew {
+  final String crew;
+  final String role;
+
+  Crew({required this.crew, required this.role});
+
+  factory Crew.fromJson(Map<String, dynamic> json) {
+    return Crew(crew: json['crew'], role: json['role']);
+  }
+
+  Map<String, dynamic> toJson() {
+    final data = <String, dynamic>{};
+    data['crew'] = crew;
+    data['role'] = role;
+    return data;
   }
 }
