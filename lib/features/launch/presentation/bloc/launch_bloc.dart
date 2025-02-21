@@ -16,7 +16,14 @@ class LaunchBloc extends Bloc<LaunchEvent, LaunchState> {
       try {
         final request = LaunchQueryRequest();
         final launches = await getQueryLaunches(request);
-        emit(LaunchLoaded(launches: launches, originalLaunches: launches, sortType: SortType.missionNameAsc));
+        emit(
+          LaunchLoaded(
+            launches: launches,
+            originalLaunches: launches,
+            sortType: SortType.missionNameAsc,
+            hasReachedMax: launches.length < request.limit,
+          ),
+        );
       } catch (e) {
         emit(LaunchError(e.toString()));
       }
@@ -27,7 +34,14 @@ class LaunchBloc extends Bloc<LaunchEvent, LaunchState> {
       try {
         final request = LaunchQueryRequest(sortField: event.sortType.field, sortOrder: event.sortType.order);
         final launches = await getQueryLaunches(request);
-        emit(LaunchLoaded(launches: launches, originalLaunches: launches, sortType: event.sortType));
+        emit(
+          LaunchLoaded(
+            launches: launches,
+            originalLaunches: launches,
+            sortType: event.sortType,
+            hasReachedMax: launches.length < request.limit,
+          ),
+        );
       } catch (e) {
         emit(LaunchError(e.toString()));
       }
@@ -38,7 +52,14 @@ class LaunchBloc extends Bloc<LaunchEvent, LaunchState> {
       try {
         final request = LaunchQueryRequest(query: event.query);
         final launches = await getQueryLaunches(request);
-        emit(LaunchLoaded(launches: launches, originalLaunches: launches, sortType: SortType.missionNameAsc));
+        emit(
+          LaunchLoaded(
+            launches: launches,
+            originalLaunches: launches,
+            sortType: SortType.missionNameAsc,
+            hasReachedMax: launches.length < request.limit,
+          ),
+        );
       } catch (e) {
         emit(LaunchError(e.toString()));
       }
@@ -51,10 +72,10 @@ class LaunchBloc extends Bloc<LaunchEvent, LaunchState> {
           final request = LaunchQueryRequest(page: event.page);
           final launches = await getQueryLaunches(request);
           emit(
-            LaunchLoaded(
+            currentState.copyWith(
               launches: currentState.launches + launches,
               originalLaunches: currentState.originalLaunches + launches,
-              sortType: currentState.sortType,
+              hasReachedMax: launches.length < request.limit,
             ),
           );
         } catch (e) {
