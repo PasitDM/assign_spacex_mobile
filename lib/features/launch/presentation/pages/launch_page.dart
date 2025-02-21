@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../common/utils/responsive.dart';
 import '../bloc/launch_bloc.dart';
 import '../widgets/launch_list_item.dart';
 import '../widgets/search_bar_widget.dart';
@@ -111,21 +112,40 @@ class _LaunchPageState extends State<LaunchPage> {
         if (state is LaunchLoading) {
           return const Center(child: CircularProgressIndicator());
         } else if (state is LaunchLoaded) {
-          return ListView.builder(
-            controller: _scrollController,
-            itemCount: state.hasReachedMax ? state.launches.length : state.launches.length + 1,
-            itemBuilder: (context, index) {
-              if (index == state.launches.length) {
-                return const Center(child: CircularProgressIndicator());
-              }
-              final launch = state.launches[index];
-              return LaunchListItem(
-                launch: launch,
-                onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => LaunchDetailPage(launch: launch)));
-                },
-              );
-            },
+          return Responsive(
+            mobile: ListView.builder(
+              controller: _scrollController,
+              itemCount: state.hasReachedMax ? state.launches.length : state.launches.length + 1,
+              itemBuilder: (context, index) {
+                if (index == state.launches.length) {
+                  return const Center(child: CircularProgressIndicator());
+                }
+                final launch = state.launches[index];
+                return LaunchListItem(
+                  launch: launch,
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => LaunchDetailPage(launch: launch)));
+                  },
+                );
+              },
+            ),
+            tablet: GridView.builder(
+              controller: _scrollController,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, childAspectRatio: 3 / 1.8),
+              itemCount: state.hasReachedMax ? state.launches.length : state.launches.length + 1,
+              itemBuilder: (context, index) {
+                if (index == state.launches.length) {
+                  return const Center(child: CircularProgressIndicator());
+                }
+                final launch = state.launches[index];
+                return LaunchListItem(
+                  launch: launch,
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => LaunchDetailPage(launch: launch)));
+                  },
+                );
+              },
+            ),
           );
         } else if (state is LaunchError) {
           return Center(child: Text(state.message));

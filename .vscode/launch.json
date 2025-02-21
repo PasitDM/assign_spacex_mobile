@@ -5,18 +5,18 @@
   "version": "0.2.0",
   "configurations": [
     {
-        "name": "Pst SpaceX",
-        "type": "dart",
-        "request": "launch",
-        "program": "lib/main.dart",
-        "args": ["--flavor", "prod"]
-      },
-      {
-        "name": "Pst SpaceX (MOCK)",
-        "type": "dart",
-        "request": "launch",
-        "program": "lib/main.dart",
-        "args": ["--flavor", "mock"]
-      },
+      "name": "Pst SpaceX",
+      "type": "dart",
+      "request": "launch",
+      "program": "lib/main.dart",
+      "args": ["--flavor", "prod"]
+    },
+    {
+      "name": "Pst SpaceX (MOCK)",
+      "type": "dart",
+      "request": "launch",
+      "program": "lib/main.dart",
+      "args": ["--flavor", "mock"]
+    }
   ]
 }
