@@ -36,7 +36,7 @@ class LaunchDetailPage extends StatelessWidget {
               BlocBuilder<LaunchDetailBloc, LaunchDetailState>(
                 builder: (context, state) {
                   if (state is LaunchDetailLoading) {
-                    return const Center(child: CircularProgressIndicator());
+                    return const Padding(padding: EdgeInsets.all(16.0), child: Center(child: CircularProgressIndicator()));
                   } else if (state is LaunchDetailLoaded) {
                     return Card(
                       color: Colors.white,
