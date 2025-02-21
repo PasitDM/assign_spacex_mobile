@@ -1,3 +1,5 @@
+import '../../data/models/launch_model.dart';
+
 class Launch {
   final String name;
   final String dateUtc;
@@ -6,6 +8,9 @@ class Launch {
   final String patchLarge;
   final bool upcoming;
   final bool success;
+  final String rocket;
+  final List<Crew> crew;
+  final String launchpad;
 
   Launch({
     required this.name,
@@ -15,5 +20,8 @@ class Launch {
     required this.patchLarge,
     required this.upcoming,
     required this.success,
+    required this.rocket,
+    required this.crew,
+    required this.launchpad,
   });
 }

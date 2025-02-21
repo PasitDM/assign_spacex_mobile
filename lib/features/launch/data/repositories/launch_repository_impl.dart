@@ -3,6 +3,7 @@ import '../../domain/entities/launchpad.dart';
 import '../../domain/entities/rocket.dart';
 import '../../domain/repositories/launch_repository.dart';
 import '../datasources/launch_remote_data_source.dart';
+import '../models/launch_query_request.dart';
 
 class LaunchRepositoryImpl implements LaunchRepository {
   final LaunchRemoteDataSource remoteDataSource;
@@ -10,20 +11,8 @@ class LaunchRepositoryImpl implements LaunchRepository {
   LaunchRepositoryImpl({required this.remoteDataSource});
 
   @override
-  Future<List<Launch>> getPastLaunches({
-    int limit = 30,
-    int page = 1,
-    String sortField = 'date_utc',
-    String sortOrder = 'desc',
-    String query = '',
-  }) async {
-    final launchModels = await remoteDataSource.queryLaunches(
-      limit: limit,
-      page: page,
-      sortField: sortField,
-      sortOrder: sortOrder,
-      query: query,
-    );
+  Future<List<Launch>> getPastLaunches(LaunchQueryRequest request) async {
+    final launchModels = await remoteDataSource.queryLaunches(request);
     return launchModels
         .map(
           (model) => Launch(
@@ -34,6 +23,9 @@ class LaunchRepositoryImpl implements LaunchRepository {
             patchLarge: model.patchLarge ?? '',
             upcoming: model.upcoming,
             success: model.success,
+            rocket: model.rocket ?? '',
+            crew: model.crew ?? [],
+            launchpad: model.launchpad ?? '',
           ),
         )
         .toList();

@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../data/models/launch_query_request.dart';
 import '../../domain/entities/launch.dart';
 import '../../domain/usecases/get_past_launches.dart';
 
@@ -13,7 +14,8 @@ class LaunchBloc extends Bloc<LaunchEvent, LaunchState> {
     on<InitialLaunches>((event, emit) async {
       emit(LaunchLoading());
       try {
-        final launches = await getPastLaunches();
+        final request = LaunchQueryRequest();
+        final launches = await getPastLaunches(request);
         emit(LaunchLoaded(launches: launches, originalLaunches: launches, sortType: SortType.missionNameAsc));
       } catch (e) {
         emit(LaunchError(e.toString()));
@@ -23,7 +25,8 @@ class LaunchBloc extends Bloc<LaunchEvent, LaunchState> {
     on<SortLaunches>((event, emit) async {
       emit(LaunchLoading());
       try {
-        final launches = await getPastLaunches(sortField: event.sortType.field, sortOrder: event.sortType.order);
+        final request = LaunchQueryRequest(sortField: event.sortType.field, sortOrder: event.sortType.order);
+        final launches = await getPastLaunches(request);
         emit(LaunchLoaded(launches: launches, originalLaunches: launches, sortType: event.sortType));
       } catch (e) {
         emit(LaunchError(e.toString()));
@@ -33,7 +36,8 @@ class LaunchBloc extends Bloc<LaunchEvent, LaunchState> {
     on<SearchLaunches>((event, emit) async {
       emit(LaunchLoading());
       try {
-        final launches = await getPastLaunches(query: event.query);
+        final request = LaunchQueryRequest(query: event.query);
+        final launches = await getPastLaunches(request);
         emit(LaunchLoaded(launches: launches, originalLaunches: launches, sortType: SortType.missionNameAsc));
       } catch (e) {
         emit(LaunchError(e.toString()));
@@ -44,7 +48,8 @@ class LaunchBloc extends Bloc<LaunchEvent, LaunchState> {
       if (state is LaunchLoaded) {
         final currentState = state as LaunchLoaded;
         try {
-          final launches = await getPastLaunches(page: event.page);
+          final request = LaunchQueryRequest(page: event.page);
+          final launches = await getPastLaunches(request);
           emit(
             LaunchLoaded(
               launches: currentState.launches + launches,

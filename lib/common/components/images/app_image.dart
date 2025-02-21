@@ -106,7 +106,7 @@ class AppImage extends StatelessWidget {
             case LoadState.failed:
               return errorWidget ?? const SizedBox();
             case LoadState.loading:
-              return const SizedBox();
+              return LinearProgressIndicator(color: Colors.blueGrey[400]);
           }
         },
       );
@@ -126,7 +126,7 @@ class AppImage extends StatelessWidget {
           if (loadingProgress == null) {
             return child;
           }
-          return const SizedBox();
+          return const LinearProgressIndicator();
         },
       );
     }

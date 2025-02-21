@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import '../models/launch_model.dart';
+import '../models/launch_query_request.dart';
 import '../models/launchpad_model.dart';
 import '../models/rocket_model.dart';
 
@@ -8,26 +9,20 @@ class LaunchRemoteDataSource {
 
   LaunchRemoteDataSource(this.dio);
 
-  Future<List<LaunchModel>> queryLaunches({
-    int limit = 30,
-    int page = 1,
-    String sortField = 'date_utc',
-    String sortOrder = 'desc',
-    String query = '',
-  }) async {
+  Future<List<LaunchModel>> queryLaunches(LaunchQueryRequest request) async {
     final response = await dio.post(
       '/launches/query',
       data: {
         'query':
-            query.isNotEmpty
+            request.query.isNotEmpty
                 ? {
-                  'name': {'\$regex': query, '\$options': 'i'},
+                  'name': {'\$regex': request.query, '\$options': 'i'},
                 }
                 : {},
         'options': {
-          'limit': limit,
-          'page': page,
-          'sort': {sortField: sortOrder},
+          'limit': request.limit,
+          'page': request.page,
+          'sort': {request.sortField: request.sortOrder},
         },
       },
     );
