@@ -23,9 +23,6 @@ The project follows **Clean Architecture** and uses **BLoC for state management*
 
 ---
 
-## 📜 **Project Setup Instructions**
-
-
 
 ## 📜 Project Setup Instructions
 ### 🔹 **1. Clone the repository**
