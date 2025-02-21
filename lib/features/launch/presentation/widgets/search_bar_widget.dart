@@ -1,10 +1,30 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../bloc/launch_bloc.dart';
 
-class SearchBarWidget extends StatelessWidget {
+class SearchBarWidget extends StatefulWidget {
   const SearchBarWidget({super.key});
+
+  @override
+  State<SearchBarWidget> createState() => _SearchBarWidgetState();
+}
+
+class _SearchBarWidgetState extends State<SearchBarWidget> {
+  Timer? _debounce;
+
+  @override
+  void dispose() {
+    _debounce?.cancel();
+    super.dispose();
+  }
+
+  void _onSearchChanged(String query) {
+    if (_debounce?.isActive ?? false) _debounce?.cancel();
+    _debounce = Timer(const Duration(milliseconds: 500), () {
+      context.read<LaunchBloc>().add(SearchLaunches(query));
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,9 +41,7 @@ class SearchBarWidget extends StatelessWidget {
           border: InputBorder.none,
           icon: Icon(Icons.search, color: Colors.grey),
         ),
-        onChanged: (query) {
-          context.read<LaunchBloc>().add(SearchLaunches(query));
-        },
+        onChanged: _onSearchChanged,
       ),
     );
   }

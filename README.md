@@ -1,16 +1,13 @@
-# assign_spacex_mobile
+# PST SpaceX - Flutter App
 
-A new Flutter project.
+This Flutter application displays SpaceX launches using the SpaceX API.
+Users can **view launch details, sort, search, and navigate to a detailed page** for each mission.
+The project follows **Clean Architecture** and uses **BLoC for state management**.
 
-## Getting Started
+---
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 📜 Project Setup Instructions
+### 🔹 **1. Clone the repository**
+```sh
+git clone https://github.com/your-repo/spacex-launches.git
+cd spacex-launches
